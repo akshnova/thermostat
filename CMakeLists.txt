@@ -34,12 +34,15 @@ include(cmake/searchLib.cmake)
 
 # add required library names here
 # searchLib(aliasName   [libraries...])
+searchLib(glfw glfw3)
+searchLib(glad glad)
+searchLib(imgui imgui)
 
 
 # replace projectNameHere 
-set(prjName projectNameHere)
-project(projectNameHere)
-generate(projectNameHere)
+set(prjName thermostat)
+project(thermostat)
+generate(thermostat)
 
-include(cmake/tests.cmake)
+include(cmake/tests.cmake)                  
 include(cmake/genDocs.cmake)
