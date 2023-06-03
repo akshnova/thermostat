@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 
-[![GPLv3 License][license-shield]][license-url]
+[![GPLv3 License][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
