@@ -18,9 +18,10 @@
 using namespace std::chrono;
 
 float conduction = 0.01f;
-
+bool initial = true;
 void core::simulate()
 {
+    if(initial) { env = 25.0f; temp = 10.0f; initial = false;}
 
     for(modifier* mod : modifiers) mod->eval(*this);
 
