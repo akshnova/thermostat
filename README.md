@@ -104,9 +104,9 @@ Akshay Bansod  - akshayb@gmx.com
 
 
 [stars-url]: https://github.com/akshnova/thermostat/stargazers
-[issues-shield]: https://img.shields.io/github/issues/akshnova/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/akshnova/thermostat?style=for-the-badge
 [issues-url]: https://github.com/akshnova/thermostat/issues
-[license-shield]: https://img.shields.io/github/license/akshnova/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/akshnova/thermostat?style=for-the-badge
 [license-url]: https://github.com/akshnova/thermostat/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/aksh-bansod
