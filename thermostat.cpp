@@ -22,7 +22,7 @@
 #include "windowing/window.hpp"
 #include "widgets/thermoWidgets.hpp"
 
-const char* title = "ThermoStat - test";
+const char* title = "ThermoStat simulation";
 
 class imguiHandler : public window::inputHandler, public imguiLayer {
 
@@ -32,8 +32,11 @@ public:
     thermoStat thermo;
 
     virtual void imguiRender() override {
-        ImGui::Begin("Stats");
+
+        // imgui ui script
+        ImGui::Begin("Stats", NULL, ImGuiWindowFlags_NoMove);
         ImGui::SetWindowSize(ImVec2(0, 0));
+        ImGui::SetWindowPos(ImVec2(0, 30));
         if(!mainCore.changed) mainCore.changed = ImGui::VSliderFloat("env", ImVec2(40, 400), &mainCore.env, -10.0f, 110.0f); 
         else ImGui::VSliderFloat("env", ImVec2(40, 400), &mainCore.env, -10.0f, 110.0f);
         ImGui::SameLine();
@@ -42,17 +45,18 @@ public:
         ImGui::VSliderFloat("temp", ImVec2(40, 400), &mainCore.temp, -10.0f, 110.0f); ImGui::SameLine();
         ImGui::End();
 
-        ImGui::Begin("ThermoStat");
+        ImGui::Begin("ThermoStat", NULL, ImGuiWindowFlags_NoMove);
         ImGui::SetWindowSize(ImVec2(0, 0));
+        ImGui::SetWindowPos(ImVec2(370, 0));
         ImGui::Checkbox("Enable", &thermo.active);
         // ImGui::LabelText("Required Temperature", "");
         ImGui::VSliderFloat("Required Temp",  ImVec2(40, 400), &thermo.reqTem, -10.0f, 110.0f);
         ImGui::End();
 
-        ImGui::ShowDemoWindow();
     };
 
     void inputLoop(){
+        // processs inputs
         while (display->run)
         {
             processEvents();
@@ -66,8 +70,8 @@ public:
 int main(){
 
     window::windowConfig cfg{
-        .width = 720,
-        .height = 480,
+        .width = 500,
+        .height = 500,
         .title = title,
         .resizable = false,
         .handler = &window::defaultInputHandler
