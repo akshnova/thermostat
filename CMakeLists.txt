@@ -46,3 +46,7 @@ generate(thermostat)
 
 include(cmake/tests.cmake)                  
 include(cmake/genDocs.cmake)
+
+# add thermostat executable
+add_executable(thermostat ${chitra_sources} thermostat.cpp)
+target_link_libraries(thermostat i-thermostat)

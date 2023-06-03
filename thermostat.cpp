@@ -14,8 +14,76 @@
 //     You should have received a copy of the GNU General Public License
 //     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+
+
 #include "pch.hpp"
+#include <glad/glad.h>
+
+#include "windowing/window.hpp"
+#include "widgets/thermoWidgets.hpp"
+
+const char* title = "ThermoStat - test";
+
+class imguiHandler : public window::inputHandler, public imguiLayer {
+
+public:
+    float sliderV=0.0f;
+    core mainCore;
+    thermoStat thermo;
+
+    virtual void imguiRender() override {
+        ImGui::Begin("Stats");
+        ImGui::SetWindowSize(ImVec2(0, 0));
+        if(!mainCore.changed) mainCore.changed = ImGui::VSliderFloat("env", ImVec2(40, 400), &mainCore.env, -10.0f, 110.0f); 
+        else ImGui::VSliderFloat("env", ImVec2(40, 400), &mainCore.env, -10.0f, 110.0f);
+        ImGui::SameLine();
+        ImGui::VSliderInt("cooling", ImVec2(40, 400), &mainCore.isCooling, 0, 1); ImGui::SameLine();
+        ImGui::VSliderInt("heating", ImVec2(40, 400), &mainCore.isHeating, 0, 1); ImGui::SameLine();
+        ImGui::VSliderFloat("temp", ImVec2(40, 400), &mainCore.temp, -10.0f, 110.0f); ImGui::SameLine();
+        ImGui::End();
+
+        ImGui::Begin("ThermoStat");
+        ImGui::SetWindowSize(ImVec2(0, 0));
+        ImGui::Checkbox("Enable", &thermo.active);
+        // ImGui::LabelText("Required Temperature", "");
+        ImGui::VSliderFloat("Required Temp",  ImVec2(40, 400), &thermo.reqTem, -10.0f, 110.0f);
+        ImGui::End();
+
+        ImGui::ShowDemoWindow();
+    };
+
+    void inputLoop(){
+        while (display->run)
+        {
+            processEvents();
+            mainCore.simulate();
+        }   
+    };
+    
+    void resized() override { glViewport(0, 0, width, height); }
+};
+
 int main(){
 
+    window::windowConfig cfg{
+        .width = 720,
+        .height = 480,
+        .title = title,
+        .resizable = false,
+        .handler = &window::defaultInputHandler
+    };
+
+
+    window* win = new window(cfg);
+    imguiHandler hand;
+    win->setActive();
+    win->switchHandler(&hand);
+
+    envMod en;
+    hand.mainCore.modifiers.push_back(&en);
+    hand.mainCore.modifiers.push_back(&hand.thermo);
+    win->layers.push_back(&hand);
+    hand.inputLoop();
+
     return 0;
-}
+};
