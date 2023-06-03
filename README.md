@@ -44,6 +44,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+![](media/preview.gif)
 
 
 
